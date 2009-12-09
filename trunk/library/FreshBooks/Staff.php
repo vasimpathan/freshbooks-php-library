@@ -44,7 +44,7 @@ class FreshBooks_Staff extends FreshBooks_ElementAction implements FreshBooks_El
 	public function asXML()
 	{
 		$content =
-							$this->_getTagXML("staffId",$this->staffId) .
+							$this->_getTagXML("staff_id",$this->staffId) .
 							$this->_getTagXML("username",$this->username) .
 							$this->_getTagXML("first_name",$this->firstName) .
 							$this->_getTagXML("last_name",$this->lastName) .

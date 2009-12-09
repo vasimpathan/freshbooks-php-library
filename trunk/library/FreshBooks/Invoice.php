@@ -28,7 +28,7 @@ class FreshBooks_Invoice extends FreshBooks_BaseInvoice
 	{
 		$content =
 							$this->_getTagXML("invoice_id",$this->invoiceId) .
-							$this->_getTagXML("amountOutstanding",$this->amountOutstanding) .
+							$this->_getTagXML("amount_outstanding",$this->amountOutstanding) .
 							$this->_getTagXML("recurringId",$this->recurringId) .
 							
 							parent::_internalXMLContent();

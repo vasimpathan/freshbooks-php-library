@@ -58,7 +58,7 @@ abstract class FreshBooks_BaseInvoice extends FreshBooks_ElementAction implement
 							$this->_getTagXML("amount",$this->amount) .
 							$this->_getTagXML("status",$this->status) .
 							$this->_getTagXML("date",$this->date) .
-							$this->_getTagXML("poNumber",$this->poNumber) .
+							$this->_getTagXML("po_number",$this->poNumber) .
 							$this->_getTagXML("discount",$this->discount) .
 							$this->_getTagXML("notes",$this->notes) .
 							$this->_getTagXML("terms",$this->terms) .
