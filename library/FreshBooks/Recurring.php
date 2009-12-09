@@ -31,8 +31,8 @@ class FreshBooks_Recurring extends FreshBooks_BaseInvoice
 	protected function _internalXMLContent()
 	{
 		$content =
-							$this->_getTagXML("recurringId",$this->recurringId) .
-							$this->_getTagXML("amountOutstanding",$this->amountOutstanding) .
+							$this->_getTagXML("recurring_id",$this->recurringId) .
+							$this->_getTagXML("amount_outstanding",$this->amountOutstanding) .
 							$this->_getTagXML("occurrences",$this->occurrences) .
 							$this->_getTagXML("frequency",$this->frequency) .
 							$this->_getTagXML("stopped",$this->stopped) .
