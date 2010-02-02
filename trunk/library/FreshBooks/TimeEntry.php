@@ -26,6 +26,7 @@ class FreshBooks_TimeEntry extends FreshBooks_ElementAction implements FreshBook
 	public $date = "";
 	public $notes = "";
 	public $hours = "";
+	public $staffId = "";
 	
 /**
  * return XML string
@@ -55,6 +56,7 @@ class FreshBooks_TimeEntry extends FreshBooks_ElementAction implements FreshBook
 		$this->date = (string)$XMLObject->date;
 		$this->notes = (string)$XMLObject->notes;
 		$this->hours = (string)$XMLObject->hours;
+		$this->staffId = (string)$XMLObject->staff_id;
 	}
 	
 /**
@@ -128,6 +130,7 @@ class FreshBooks_TimeEntry extends FreshBooks_ElementAction implements FreshBook
 			unset($this->date);
 			unset($this->notes);
 			unset($this->hours);
+			unset($this->staffId);
 		}
 	}
 	
