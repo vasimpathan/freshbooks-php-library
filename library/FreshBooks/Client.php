@@ -46,7 +46,9 @@ class FreshBooks_Client extends FreshBooks_ElementAction implements FreshBooks_E
 	public $sState = "";
 	public $sCountry = "";
 	public $sCode = "";
-	
+
+	public $linkClientView;
+	public $linkView;
 /**
  * return XML string
  */ 	
@@ -111,7 +113,12 @@ class FreshBooks_Client extends FreshBooks_ElementAction implements FreshBooks_E
 		$this->sCity = (string)$XMLObject->s_city;
 		$this->sState = (string)$XMLObject->s_state;
 		$this->sCountry = (string)$XMLObject->s_country;
-		$this->sCode = (string)$XMLObject->s_code;	
+		$this->sCode = (string)$XMLObject->s_code;
+
+		if(isset($XMLObject->links)){
+			$this->linkClientView = (string)$XMLObject->links->client_view;
+			$this->linkView = (string)$XMLObject->links->view;
+		}
 	}
 	
 /**
