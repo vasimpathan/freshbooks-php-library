@@ -26,6 +26,8 @@ class FreshBooks_Project extends FreshBooks_ElementAction implements FreshBooks_
 	public $clientId = "";
 	public $rate = "";
 	public $description = "";
+	public $staff = array();
+	public $tasks = array();
 	
 /**
  * return XML string
@@ -38,10 +40,28 @@ class FreshBooks_Project extends FreshBooks_ElementAction implements FreshBooks_
 							$this->_getTagXML("bill_method",$this->billMethod) .
 							$this->_getTagXML("client_id",$this->clientId) .
 							$this->_getTagXML("rate",$this->rate) .
-							$this->_getTagXML("description",$this->description);
+							$this->_getTagXML("description",$this->description) .
+							$this->_tasksAsXML();
 							
 		return $this->_getTagXML("project",$content);
 		
+	}
+
+/**
+ * generate XML output from tasks array
+ */
+	protected function _tasksAsXML(){
+
+		$content = '';
+		foreach ($this->tasks as $taskId){
+			$content .= $this->_getTagXML("task_id",$taskId);
+		}
+		if($content != ''){
+			return $this->_getTagXML("tasks",$content);
+		}
+		else{
+			return '';
+		}
 	}
 	
 /**
@@ -55,6 +75,22 @@ class FreshBooks_Project extends FreshBooks_ElementAction implements FreshBooks_
 		$this->clientId = (string)$XMLObject->client_id;
 		$this->rate = (string)$XMLObject->rate;		
 		$this->description = (string)$XMLObject->description;
+		$this->_loadStaff($XMLObject);
+	}
+
+/**
+ * load staff array from XML object
+ */
+	protected function _loadStaff(&$XMLObject){
+		$staff = $XMLObject->staff;
+		if($staff){
+			foreach ($staff->children() as $staffXML){
+				$this->staff[] = (string)$staffXML;
+			}
+		}
+		else{
+			$this->stuff = array();
+		}
 	}
 	
 /**
