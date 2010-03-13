@@ -27,6 +27,29 @@ else{
 }
 }}}
 
+==New Client==
+{{{
+//new Client object
+$client = new FreshBooks_Client();
+
+//populate client’s properties
+$client->email = ‘test@test.com’;
+$client->firstName = ‘Chad’;
+$client->lastName = ‘Smith’;
+
+//all other required properties should be populated
+
+//try to create new client with provided data on FB server
+if(!$client->create()){
+    //read error
+    echo $client->lastError;
+}
+else{
+    //investigate populated data
+    print_r($client);
+}
+}}}
+
 ==New Invoice==
 {{{
 //new Invoice object
@@ -60,28 +83,5 @@ if(!$invoice->create()){
 else{
     //investigate populated data
     print_r($invoice);
-}
-}}}
-
-==New Client==
-{{{
-//new Client object
-$client = new FreshBooks_Client();
-
-//populate client’s properties
-$client->email = ‘test@test.com’;
-$client->firstName = ‘Chad’;
-$client->lastName = ‘Smith’;
-
-//all other required properties should be populated
-
-//try to create new client with provided data on FB server
-if(!$client->create()){
-    //read error
-    echo $client->lastError;
-}
-else{
-    //investigate populated data
-    print_r($client);
 }
 }}}
