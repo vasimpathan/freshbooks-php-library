@@ -1,5 +1,5 @@
 #labels Featured,Example,Usage
-=Usage Snippets=
+<wiki:toc max_depth="2" />
 
 ==Get Client Data==
 {{{
