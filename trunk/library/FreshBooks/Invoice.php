@@ -153,4 +153,21 @@ class FreshBooks_Invoice extends FreshBooks_BaseInvoice
 		$responseStatus = $this->_processResponse($responseXML);
 		return $responseStatus;
 	}
+
+    /**
+     * Send invoice by email
+     *
+     * @author Jason Mickela jason@gilmanstreetmedia.com
+     * @param string $subject
+     * @param string $message
+     * @return boolean
+     */
+    public function sendByEmail($subject, $message){
+        $this->_internalPrepareSendByEmail($content);
+        $content .= "<subject>$subject</subject><message>$message</message>";
+        $responseXML = $this->_sendRequest($content,"sendByEmail");
+        $responseStatus = $this->_processResponse($responseXML);
+        $this->_internalSendByEmail($responseStatus,$responseXML);
+        return $responseStatus;
+    }
 }
