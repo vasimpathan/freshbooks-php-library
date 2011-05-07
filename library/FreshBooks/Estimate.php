@@ -110,10 +110,12 @@ class FreshBooks_Estimate extends FreshBooks_BaseInvoice
 	
 /**
  * prepare XML string request for SENDBYEMAIL server method
- */		
-	protected function _internalPrepareSendByEmail(&$content)
+ */
+	protected function _internalPrepareSendByEmail(&$content,$subject = '', $message = '')
 	{
-		$content = $this->_getTagXML("estimate_id",$this->estimateId);
+		$content =  $this->_getTagXML("estimate_id",$this->estimateId) .
+                    $this->_getTagXML("subject", $subject) .
+                    $this->_getTagXML("message", $message);
 	}
 
 /**

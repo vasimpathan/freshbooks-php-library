@@ -18,6 +18,8 @@ USAGE:
 
 Please take a look at example.php file from this package. It's trivial example to should be good enough to demonstrate usage. More more details please reffer to docs directory.
 
+More samples can be found in [samples] dir. In order to try samples, please first copy include/init.dist.php as include/init.php and update url and token values. You can run samples via web browser or from command line, ex.: php get-client.php
+
 ======================================================================
 
 LICENSE:

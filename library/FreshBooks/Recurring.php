@@ -24,6 +24,12 @@ class FreshBooks_Recurring extends FreshBooks_BaseInvoice
 	public $stopped = "";
 	public $sendEmail = "";
 	public $sendSnailMail = "";
+
+    public $autobillGatewayName = "";
+    public $autobillCardNumber = "";
+    public $autobillCardName = "";
+    public $autobillCardExpirationMonth = "";
+    public $autobillCardExpirationYear = "";
 	
 /**
  * return XML content
@@ -38,11 +44,26 @@ class FreshBooks_Recurring extends FreshBooks_BaseInvoice
 							$this->_getTagXML("stopped",$this->stopped) .
 							$this->_getTagXML("send_email",$this->sendEmail) .
 							$this->_getTagXML("send_snail_mail",$this->sendSnailMail) .
-							
+							$this->_autobillAsXML() .
 							parent::_internalXMLContent();
 							
 		return $content;
 		
+	}
+
+/**
+ * generate XML output from autobill properties
+ */
+	protected function _autobillAsXML(){
+		$content  =     $this->_getTagXML("month",$this->autobillCardExpirationMonth) .
+                        $this->_getTagXML("year",$this->autobillCardExpirationYear);
+        $content =  $this->_getTagXML("expiration", $content) .
+                    $this->_getTagXML("number", $this->autobillCardNumber) .
+                    $this->_getTagXML("name", $this->autobillCardName);
+        $content =  $this->_getTagXML("card", $content) .
+                    $this->_getTagXML("gateway_name", $this->autobillGatewayName);
+
+		return $this->_getTagXML("autobill",$content);
 	}
 	
 /**
@@ -58,6 +79,17 @@ class FreshBooks_Recurring extends FreshBooks_BaseInvoice
 		$this->stopped = (string)$XMLObject->stopped;
 		$this->sendEmail = (string)$XMLObject->send_email;
 		$this->sendSnailMail = (string)$XMLObject->send_snail_mail;
+
+        if(isset ($XMLObject->autobill)){
+            $this->autobillGatewayName = (string)$XMLObject->autobill->gateway_name;
+            if(isset ($XMLObject->autobill->card)){
+                $this->autobillCardNumber = (string)$XMLObject->autobill->card->number;
+                $this->autobillCardName = (string)$XMLObject->autobill->card->name;
+                $this->autobillCardExpirationMonth = (int)$XMLObject->autobill->card->expiration->month;
+                $this->autobillCardExpirationYear = (int)$XMLObject->autobill->card->expiration->year;
+            }
+        }
+        
 		
 		parent::_internalLoadXML($XMLObject);
 	}
@@ -148,24 +180,27 @@ class FreshBooks_Recurring extends FreshBooks_BaseInvoice
 	
 /**
  * prepare XML string request for SENDBYEMAIL server method
- */	
-	protected function _internalPrepareSendByEmail(&$content)
+ */
+	protected function _internalPrepareSendByEmail(&$content,$subject = '', $message = '')
 	{
-		//
+        return false;
 	}
-	
+
 /**
  * process XML string response from SENDBYEMAIL server method
- */	
+ */
 	protected function _internalSendByEmail($responseStatus,&$XMLObject)
 	{
 		//
 	}
 
-/**
- * overrides send email since not supported; returns false
- */	
-	public function sendEmail(){
-		return false;
+    /**
+     * Send invoice by email
+     * @param string $subject
+     * @param string $message
+     * @return boolean
+     */
+	public function sendByEmail($subject = '', $message = ''){
+        return false;
 	}
 }
